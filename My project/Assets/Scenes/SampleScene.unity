@@ -1127,6 +1127,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7089096580967488811, guid: 025e4fa294e76594b8c460bb981c30b4, type: 3}
+      propertyPath: terrainLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7089096580967488812, guid: 025e4fa294e76594b8c460bb981c30b4, type: 3}
       propertyPath: m_Name
       value: Elephant
