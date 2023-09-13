@@ -2,46 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class ScreenshotCapture : MonoBehaviour
+public class ScreenshotManager : MonoBehaviour
 {
-    #region Take Screenshot
+    //COMMENTING FOR TESTING PURPOSES
     
-    private int screenshotCount = 0;
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1)) // Right mouse button click
-        {
-            CaptureScreenshot();
-        }
-        // Check for input to cycle through screenshots
-        // if (Input.GetKeyDown(previousScreenshotKey))
-        // {
-        //     ShowPreviousScreenshot();
-        // }
-        // else if (Input.GetKeyDown(nextScreenshotKey))
-        // {
-        //     ShowNextScreenshot();
-        // }
-    }
-
-    private void CaptureScreenshot()
-    {
-        string screenshotFileName = "Screenshot_" + screenshotCount + ".png";
-        string screenshotFilePath = System.IO.Path.Combine(Application.dataPath, screenshotFileName);
-
-        ScreenCapture.CaptureScreenshot(screenshotFilePath);
-
-        Debug.Log("Screenshot captured: " + screenshotFilePath);
-
-        screenshotCount++;
-    }
-    #endregion
-
-    /*
-    #region Cycle Screenshots
-    
-    public string screenshotFolder = "Screenshots"; // The folder where screenshots will be saved
+    /*public string screenshotFolder = "Screenshots"; // The folder where screenshots will be saved
     public KeyCode previousScreenshotKey = KeyCode.LeftArrow; // Key to cycle to the previous screenshot
     public KeyCode nextScreenshotKey = KeyCode.RightArrow; // Key to cycle to the next screenshot
 
@@ -68,7 +33,20 @@ public class ScreenshotCapture : MonoBehaviour
             ShowCurrentScreenshot();
         }
     }
-    
+
+    private void Update()
+    {
+        // Check for input to cycle through screenshots
+        if (Input.GetKeyDown(previousScreenshotKey))
+        {
+            ShowPreviousScreenshot();
+        }
+        else if (Input.GetKeyDown(nextScreenshotKey))
+        {
+            ShowNextScreenshot();
+        }
+    }
+
     private void ShowCurrentScreenshot()
     {
         if (screenshotPaths.Count > 0)
@@ -117,7 +95,6 @@ public class ScreenshotCapture : MonoBehaviour
             Debug.LogError("Failed to load screenshot: " + path);
             return null;
         }
-    }
-    #endregion
-    */
+    }*/
 }
+
