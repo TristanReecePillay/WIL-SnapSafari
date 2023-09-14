@@ -12,6 +12,7 @@ public class ScreenshotManager : MonoBehaviour
     private int currentScreenshotIndex = -1; // Initialize to -1 to indicate no screenshot is currently displayed
     private bool isScreenshotVisible = false;
     private bool isPanelVisible = false; // Add this variable to track panel visibility
+    private bool isPaused = false;
 
     private void Start()
     {
@@ -30,6 +31,29 @@ public class ScreenshotManager : MonoBehaviour
         {
             ToggleScreenshotDisplay();
             ToggleScreenshotPanel(); // Toggle the panel when Tab is pressed
+            //Time.timeScale = 0;
+            
+            // Check if the Tab key is pressed
+           
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            // Toggle between pause and unpause
+            if (isPaused)
+            {
+                // Resume the game
+                Time.timeScale = 1.0f;
+            }
+            else
+            {
+                // Pause the game
+                Time.timeScale = 0.0f;
+                Debug.Log("Game is paused");
+            }
+
+            // Toggle the paused state
+            isPaused = !isPaused;
         }
 
         // Cycle between screenshots using arrow keys
@@ -43,6 +67,7 @@ public class ScreenshotManager : MonoBehaviour
             {
                 ShowNextScreenshot();
             }
+            
         }
     }
 
