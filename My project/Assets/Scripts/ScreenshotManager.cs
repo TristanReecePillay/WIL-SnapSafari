@@ -1,100 +1,122 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 
 public class ScreenshotManager : MonoBehaviour
 {
-    //COMMENTING FOR TESTING PURPOSES
-    
-    /*public string screenshotFolder = "Screenshots"; // The folder where screenshots will be saved
-    public KeyCode previousScreenshotKey = KeyCode.LeftArrow; // Key to cycle to the previous screenshot
-    public KeyCode nextScreenshotKey = KeyCode.RightArrow; // Key to cycle to the next screenshot
-
-    private List<string> screenshotPaths = new List<string>();
-    private int currentScreenshotIndex = 0;
+    public Image screenshotDisplay;
+    public GameObject screenshotPanel; // Reference to the UI panel
+    private List<Texture2D> screenshots = new List<Texture2D>();
+    private int currentScreenshotIndex = -1; // Initialize to -1 to indicate no screenshot is currently displayed
+    private bool isScreenshotVisible = false;
+    private bool isPanelVisible = false; // Add this variable to track panel visibility
 
     private void Start()
     {
-        // Ensure the screenshot folder exists
-        Directory.CreateDirectory(screenshotFolder);
-
-        // Get all screenshot files in the folder
-        string[] screenshotFiles = Directory.GetFiles(screenshotFolder, "*.png");
-
-        // Add the paths of all screenshots to the list
-        screenshotPaths.AddRange(screenshotFiles);
-
-        if (screenshotPaths.Count == 0)
-        {
-            Debug.LogWarning("No screenshots found in the folder: " + screenshotFolder);
-        }
-        else
-        {
-            ShowCurrentScreenshot();
-        }
+        screenshotDisplay.gameObject.SetActive(false); // Hide the image initially
+        screenshotPanel.SetActive(false); // Hide the panel initially
     }
 
     private void Update()
     {
-        // Check for input to cycle through screenshots
-        if (Input.GetKeyDown(previousScreenshotKey))
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            ShowPreviousScreenshot();
+            TakeScreenshot();
         }
-        else if (Input.GetKeyDown(nextScreenshotKey))
+
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            ShowNextScreenshot();
+            ToggleScreenshotDisplay();
+            ToggleScreenshotPanel(); // Toggle the panel when Tab is pressed
         }
-    }
 
-    private void ShowCurrentScreenshot()
-    {
-        if (screenshotPaths.Count > 0)
+        // Cycle between screenshots using arrow keys
+        if (isScreenshotVisible && screenshots.Count > 0)
         {
-            string currentScreenshotPath = screenshotPaths[currentScreenshotIndex];
-            Texture2D screenshotTexture = LoadScreenshotTexture(currentScreenshotPath);
-
-            if (screenshotTexture != null)
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                // Display the screenshot wherever you want, for example, on a UI RawImage
-                // Assuming you have a RawImage component named "screenshotImage" on your canvas
-                // You can change this according to your needs
-                GameObject.Find("screenshotImage").GetComponent<UnityEngine.UI.RawImage>().texture = screenshotTexture;
+                ShowPreviousScreenshot();
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                ShowNextScreenshot();
             }
         }
     }
 
-    private void ShowNextScreenshot()
+    private void TakeScreenshot()
     {
-        if (screenshotPaths.Count > 0)
+        StartCoroutine(CaptureScreenshot());
+    }
+
+    private IEnumerator CaptureScreenshot()
+    {
+        yield return new WaitForEndOfFrame();
+
+        Texture2D screenshot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        screenshot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        screenshot.Apply();
+
+        screenshots.Add(screenshot);
+        currentScreenshotIndex = screenshots.Count - 1; // Update the index to the latest screenshot
+
+        SaveScreenshotToFile(screenshot);
+    }
+
+    private void SaveScreenshotToFile(Texture2D screenshot)
+    {
+        byte[] bytes = screenshot.EncodeToPNG();
+        string screenshotPath = Path.Combine(Application.dataPath, "Screenshots");
+        Directory.CreateDirectory(screenshotPath);
+
+        string screenshotFileName = $"Screenshot_{System.DateTime.Now:yyyy-MM-dd_HH-mm-ss}.png";
+        string screenshotFilePath = Path.Combine(screenshotPath, screenshotFileName);
+
+        File.WriteAllBytes(screenshotFilePath, bytes);
+        Debug.Log($"Screenshot saved: {screenshotFilePath}");
+    }
+
+    private void ToggleScreenshotDisplay()
+    {
+        isScreenshotVisible = !isScreenshotVisible;
+
+        if (isScreenshotVisible)
         {
-            currentScreenshotIndex = (currentScreenshotIndex + 1) % screenshotPaths.Count;
-            ShowCurrentScreenshot();
+            ShowScreenshot(currentScreenshotIndex); // Display the current screenshot
         }
+        else
+        {
+            screenshotDisplay.gameObject.SetActive(false);
+        }
+    }
+
+    private void ToggleScreenshotPanel()
+    {
+        isPanelVisible = !isPanelVisible;
+        screenshotPanel.SetActive(isPanelVisible);
     }
 
     private void ShowPreviousScreenshot()
     {
-        if (screenshotPaths.Count > 0)
-        {
-            currentScreenshotIndex = (currentScreenshotIndex - 1 + screenshotPaths.Count) % screenshotPaths.Count;
-            ShowCurrentScreenshot();
-        }
+        currentScreenshotIndex = (currentScreenshotIndex - 1 + screenshots.Count) % screenshots.Count;
+        ShowScreenshot(currentScreenshotIndex);
     }
 
-    private Texture2D LoadScreenshotTexture(string path)
+    private void ShowNextScreenshot()
     {
-        byte[] fileData = File.ReadAllBytes(path);
-        Texture2D texture = new Texture2D(2, 2); // Create a new Texture2D
-        if (texture.LoadImage(fileData)) // Load the image data into the Texture2D
+        currentScreenshotIndex = (currentScreenshotIndex + 1) % screenshots.Count;
+        ShowScreenshot(currentScreenshotIndex);
+    }
+
+    private void ShowScreenshot(int index)
+    {
+        if (screenshots.Count > 0)
         {
-            return texture;
+            screenshotDisplay.sprite = Sprite.Create(screenshots[index], new Rect(0, 0, screenshots[index].width, screenshots[index].height), Vector2.one * 0.5f);
+            screenshotDisplay.gameObject.SetActive(true);
         }
-        else
-        {
-            Debug.LogError("Failed to load screenshot: " + path);
-            return null;
-        }
-    }*/
+    }
 }
 
