@@ -17,7 +17,7 @@ public class AnimalController : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)  
+        if (Vector3.Distance(transform.position, targetPosition) < 0.5f)  
         {
             GenerateRandomTarget();
         }
