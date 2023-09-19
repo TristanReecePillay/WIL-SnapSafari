@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7127570016692723013}
   - component: {fileID: 7127570016692723001}
   - component: {fileID: 7127570016692723012}
+  - component: {fileID: 4437027282310838391}
   m_Layer: 0
   m_Name: Leoperd
   m_TagString: Animals
@@ -132,3 +133,19 @@ MonoBehaviour:
   terrainLayer:
     serializedVersion: 2
     m_Bits: 0
+  waterSurfaceEffect: {fileID: 0}
+--- !u!114 &4437027282310838391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7127570016692723011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ccebe73a9f063b4f8e51ace5e058d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reducedSpeed: 0.5
+  playerController: {fileID: 0}
+  isInWater: 0

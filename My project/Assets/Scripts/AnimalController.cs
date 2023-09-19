@@ -8,6 +8,8 @@ public class AnimalController : MonoBehaviour
     public float maxDistance = 2.0f;
     public LayerMask terrainLayer; // Assign the terrain layer in the Inspector
 
+    public WaterSurfaceEffect waterSurfaceEffect;
+
     private Vector3 targetPosition;
 
     private void Start()
@@ -23,9 +25,19 @@ public class AnimalController : MonoBehaviour
         }
 
         Vector3 moveDirection = (targetPosition - transform.position).normalized;
-        transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
 
-        ConstrainToTerrain();
+        if (waterSurfaceEffect != null && waterSurfaceEffect.isInWater)
+        {
+            // Reduce the animal's movement speed when in the water
+            transform.Translate(moveDirection * moveSpeed * waterSurfaceEffect.reducedSpeed * Time.deltaTime);
+        }
+        else
+        {
+            // Normal movement speed on land
+            transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+        }
+
+        //ConstrainToTerrain();
     }
 
     private void GenerateRandomTarget()
@@ -39,7 +51,12 @@ public class AnimalController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(targetPosition + Vector3.up * 10.0f, Vector3.down, out hit, Mathf.Infinity, terrainLayer))
         {
-            targetPosition = hit.point;
+            targetPosition = hit.point + Vector3.up * 1.0f; ;
+        }
+        else
+        {
+            // Handle the case where no terrain is hit (e.g., if terrainLayer is not set correctly)
+            Debug.LogWarning("Target position is not on the terrain.");
         }
     }
 
@@ -50,5 +67,12 @@ public class AnimalController : MonoBehaviour
         {
             transform.position = hit.point;
         }
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(targetPosition, 0.5f); // You can adjust the size and color as needed
     }
 }
