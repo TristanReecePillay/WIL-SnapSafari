@@ -10,7 +10,7 @@ public class PlayShutterOnClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown("p"))
         {
             source.PlayOneShot(clip);
         }
