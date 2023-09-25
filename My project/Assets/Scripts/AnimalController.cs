@@ -37,6 +37,7 @@ public class AnimalController : MonoBehaviour
             transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
         }
 
+        RotateTowardsTarget(targetPosition); 
         //ConstrainToTerrain();
     }
 
@@ -68,6 +69,13 @@ public class AnimalController : MonoBehaviour
             transform.position = hit.point;
         }
 
+    }
+
+    private void RotateTowardsTarget(Vector3 target)
+    {
+        Vector3 directionToTarget = (target - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime);
     }
 
     private void OnDrawGizmos()
