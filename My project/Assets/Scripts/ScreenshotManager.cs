@@ -84,10 +84,50 @@ public class ScreenshotManager : MonoBehaviour
         screenshot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         screenshot.Apply();
 
+        // Calculate the raycast origin (position on the terrain)
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Center of the screenshot
+        Vector3 raycastOrigin = ray.origin;
+
+        // Calculate the raycast direction (camera's forward direction)
+        Vector3 raycastDirection = Camera.main.transform.forward;
+
+        RaycastHit hit;
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, Mathf.Infinity))
+        {
+
+            if (hit.collider.CompareTag("Animals"))
+            {
+                // A GameObject was hit by the raycast
+                GameObject hitObject = hit.collider.gameObject;
+
+                // You can now work with the hitObject or perform any desired actions
+                Debug.Log("Hit object: " + hitObject.name);
+
+                // Handle the detection of the GameObject here
+                HandleGameObjectDetection(hitObject);
+            }
+            else
+            {
+                Debug.Log("Hit object is not an animal.");
+            }
+           
+        }
+        else
+        {
+            // The raycast did not hit any GameObject
+            Debug.Log("No object hit.");
+        }
+
         screenshots.Add(screenshot);
         currentScreenshotIndex = screenshots.Count - 1; // Update the index to the latest screenshot
 
         SaveScreenshotToFile(screenshot);
+    }
+
+    private void HandleGameObjectDetection(GameObject detectedObject)
+    {
+        // Implement logic to handle the detected GameObject
+        //  display information, trigger actions, or store data related to the detected object here
     }
 
     private void SaveScreenshotToFile(Texture2D screenshot)
