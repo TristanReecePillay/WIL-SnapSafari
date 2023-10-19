@@ -1077,6 +1077,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Animals
       objectReference: {fileID: 0}
+    - target: {fileID: 1426276673972010646, guid: e8ef8859a455b9e4bae668155af6f9a1, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 1426276673972010647, guid: e8ef8859a455b9e4bae668155af6f9a1, type: 3}
       propertyPath: moveSpeed
       value: 2
