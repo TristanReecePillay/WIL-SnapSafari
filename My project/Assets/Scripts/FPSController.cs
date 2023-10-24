@@ -15,9 +15,10 @@ public class FPSController : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded;
 
+
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         rb = GetComponent<Rigidbody>();
@@ -64,16 +65,24 @@ public class FPSController : MonoBehaviour
 
     private void HandleMouseLook()
     {
-        // Get mouse input
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = -Input.GetAxis("Mouse Y") * mouseSensitivity;
+        if (PauseMenu.GameIsPaused)
+        {
+            return;
+        }
+        else
+        {
+            // Get mouse input
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+            float mouseY = -Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        // Rotate the player horizontally
-        transform.Rotate(0f, mouseX, 0f);
+            // Rotate the player horizontally
+            transform.Rotate(0f, mouseX, 0f);
 
-        // Rotate the camera vertically
-        verticalRotation += mouseY;
-        verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
-        playerCamera.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+            // Rotate the camera vertically
+            verticalRotation += mouseY;
+            verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
+            playerCamera.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+        }
     }
+        
 }
