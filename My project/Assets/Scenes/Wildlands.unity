@@ -1154,6 +1154,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7625249225869649412, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 7625249225869649414, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
       propertyPath: m_Name
       value: African_Elephant
