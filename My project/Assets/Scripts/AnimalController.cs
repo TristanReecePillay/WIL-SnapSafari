@@ -19,6 +19,8 @@ public class AnimalController : MonoBehaviour
 
     private void Update()
     {
+        RotateTowardsTarget(targetPosition);
+
         if (Vector3.Distance(transform.position, targetPosition) < 1.0f)  
         {
             GenerateRandomTarget();
@@ -37,7 +39,7 @@ public class AnimalController : MonoBehaviour
             transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
         }
 
-        RotateTowardsTarget(targetPosition); 
+        
         //ConstrainToTerrain();
     }
 
@@ -73,7 +75,7 @@ public class AnimalController : MonoBehaviour
 
     private void RotateTowardsTarget(Vector3 target)
     {
-        Vector3 directionToTarget = (target - transform.position).normalized;
+        Vector3 directionToTarget = (target - transform.position);
         Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime);
     }
