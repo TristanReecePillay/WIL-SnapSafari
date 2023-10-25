@@ -102,15 +102,21 @@ public class FPSController : MonoBehaviour
         {
             // Get mouse input
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-            float mouseY = -Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+            if(isFpsMode)
+            {
+                float mouseY = -Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+                // Rotate the camera vertically
+                verticalRotation += mouseY;
+                verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
+                playerCamera.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+
+            }
 
             // Rotate the player horizontally
             transform.Rotate(0f, mouseX, 0f);
 
-            // Rotate the camera vertically
-            verticalRotation += mouseY;
-            verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
-            playerCamera.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
         }
     }
 
@@ -119,7 +125,7 @@ public class FPSController : MonoBehaviour
         if (enable && !isFpsMode)
         {
             // Switch to first-person mode
-            playerCamera.transform.localPosition = new Vector3(0.8f, 1.65f, -1.2f); // Move the camera to the character's head
+            playerCamera.transform.localPosition = new Vector3(0.0f, 1.7f, 0.4f); // Move the camera to the character's head
             playerCamera.localRotation = Quaternion.identity; // Reset camera rotation
 
             isFpsMode = true;
