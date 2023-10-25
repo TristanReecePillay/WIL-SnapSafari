@@ -15,6 +15,12 @@ public class FPSController : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded;
 
+    Animator animator;
+    private Vector3 currentMovementDirection = Vector3.forward;
+
+    private bool isFpsMode = false; // Flag to track first-person mode
+    private Vector3 originalCameraPosition; 
+    private Quaternion originalCameraRotation; 
 
     private void Start()
     {
@@ -24,14 +30,26 @@ public class FPSController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
+        animator = this.GetComponent<Animator>();
+
         // Move the camera inside the player's head (optional)
-        playerCamera.transform.localPosition = new Vector3(0f, 0.8f, 0f);
+        //playerCamera.transform.localPosition = new Vector3(0.8f, 1.65f, -1.2f);
+
+        // Store the original camera position and rotation
+        originalCameraPosition = playerCamera.transform.localPosition; 
+        originalCameraRotation = playerCamera.localRotation; 
+
     }
 
     private void Update()
     {
         HandleMovement();
         HandleMouseLook();
+
+        if (Input.GetMouseButtonDown(1)) // 1 corresponds to the right mouse button
+        {
+            ToggleFpsMode(!isFpsMode); // Toggle the mode
+        }
     }
 
     private void HandleMovement()
@@ -50,6 +68,8 @@ public class FPSController : MonoBehaviour
         // Calculate the desired move direction
         Vector3 moveDirection = (forward * moveForward + right * moveSideways).normalized;
 
+        currentMovementDirection = moveDirection; 
+
         // Apply movement speed
         Vector3 targetVelocity = moveDirection * moveSpeed;
         targetVelocity.y = rb.velocity.y; // Preserve vertical velocity for jumping and gravity
@@ -60,6 +80,15 @@ public class FPSController : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+
+        if (moveDirection != Vector3.zero)
+        {
+            animator.SetInteger("State", 1);
+        }
+        else
+        {
+            animator.SetInteger("State", 0);
         }
     }
 
@@ -84,5 +113,25 @@ public class FPSController : MonoBehaviour
             playerCamera.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
         }
     }
-        
+
+    private void ToggleFpsMode(bool enable)
+    {
+        if (enable && !isFpsMode)
+        {
+            // Switch to first-person mode
+            playerCamera.transform.localPosition = new Vector3(0.8f, 1.65f, -1.2f); // Move the camera to the character's head
+            playerCamera.localRotation = Quaternion.identity; // Reset camera rotation
+
+            isFpsMode = true;
+        }
+        else if (!enable && isFpsMode)
+        {
+            // Switch back to third-person mode
+            playerCamera.transform.localPosition = originalCameraPosition; // Restore original position
+            playerCamera.localRotation = originalCameraRotation; // Restore original rotation
+
+            isFpsMode = false;
+        }
+    }
+
 }

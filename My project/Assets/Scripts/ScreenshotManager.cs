@@ -8,6 +8,7 @@ public class ScreenshotManager : MonoBehaviour
 {
     public Image screenshotDisplay;
     public GameObject screenshotPanel; // Reference to the UI panel
+    public GameObject minimap;
     private List<Texture2D> screenshots = new List<Texture2D>();
     private int currentScreenshotIndex = -1; // Initialize to -1 to indicate no screenshot is currently displayed
     private bool isScreenshotVisible = false;
@@ -78,11 +79,14 @@ public class ScreenshotManager : MonoBehaviour
 
     private IEnumerator CaptureScreenshot()
     {
+        minimap.SetActive(false);
         yield return new WaitForEndOfFrame();
 
         Texture2D screenshot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         screenshot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         screenshot.Apply();
+
+        minimap.SetActive(true);
 
         // Calculate the raycast origin (position on the terrain)
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Center of the screenshot
