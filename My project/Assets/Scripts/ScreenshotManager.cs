@@ -167,13 +167,13 @@ public class ScreenshotManager : MonoBehaviour
         screenshotPanel.SetActive(isPanelVisible);
     }
 
-    private void ShowPreviousScreenshot()
+    public void ShowPreviousScreenshot()
     {
         currentScreenshotIndex = (currentScreenshotIndex - 1 + screenshots.Count) % screenshots.Count;
         ShowScreenshot(currentScreenshotIndex);
     }
 
-    private void ShowNextScreenshot()
+    public void ShowNextScreenshot()
     {
         currentScreenshotIndex = (currentScreenshotIndex + 1) % screenshots.Count;
         ShowScreenshot(currentScreenshotIndex);
@@ -199,6 +199,19 @@ public class ScreenshotManager : MonoBehaviour
     public void CloseScreenshots()
     {
         screenshotPanel.SetActive(false);
+    }
+
+    public void ShowCompendium()
+    {
+
+        ToggleScreenshotDisplay();
+        ToggleScreenshotPanel();
+    }
+
+    public void CloseCompendium()
+    {
+        ToggleScreenshotDisplay();
+        ToggleScreenshotPanel();
     }
 }
 
