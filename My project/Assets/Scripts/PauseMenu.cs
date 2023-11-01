@@ -19,13 +19,10 @@ public class PauseMenu : MonoBehaviour
             if (GameIsPaused)
             {
                 Resume();
-                MiniMapMenuUI.SetActive(true);
-
             }
             else
             {
-                Pause();
-                MiniMapMenuUI.SetActive(false);
+                Pause(); 
             }
         }
     }
@@ -43,6 +40,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0.0f;
         GameIsPaused = true;
+        MiniMapMenuUI.SetActive(false);
     }
 
     public void LoadMenu()

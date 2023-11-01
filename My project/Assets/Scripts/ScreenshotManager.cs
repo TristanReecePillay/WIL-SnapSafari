@@ -181,11 +181,24 @@ public class ScreenshotManager : MonoBehaviour
 
     private void ShowScreenshot(int index)
     {
-        if (screenshots.Count > 0)
-        {
-            screenshotDisplay.sprite = Sprite.Create(screenshots[index], new Rect(0, 0, screenshots[index].width, screenshots[index].height), Vector2.one * 0.5f);
-            screenshotDisplay.gameObject.SetActive(true);
-        }
+        //if (screenshots.Count > 0)
+        //{
+        //    screenshotDisplay.sprite = Sprite.Create(screenshots[index], new Rect(0, 0, screenshots[index].width, screenshots[index].height), Vector2.one * 0.5f);
+        //    screenshotDisplay.gameObject.SetActive(true);
+        //}
+     
+            if (screenshots.Count > 0)
+            {
+                Image screenshotImage = screenshotDisplay.GetComponent<Image>();
+                screenshotImage.sprite = Sprite.Create(screenshots[index], new Rect(0, 0, screenshots[index].width, screenshots[index].height), Vector2.one * 0.5f);
+                screenshotDisplay.gameObject.SetActive(true);
+            }
+
+    }
+
+    public void CloseScreenshots()
+    {
+        screenshotPanel.SetActive(false);
     }
 }
 
