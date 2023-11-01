@@ -19,7 +19,9 @@ public class AnimalController : MonoBehaviour
 
     private void Update()
     {
+        
         RotateTowardsTarget(targetPosition);
+        transform.LookAt((targetPosition)); //Animals look towards target but still walk sideways for some reason
 
         if (Vector3.Distance(transform.position, targetPosition) < 1.0f)  
         {
@@ -27,7 +29,6 @@ public class AnimalController : MonoBehaviour
         }
 
         Vector3 moveDirection = (targetPosition - transform.position).normalized;
-
         if (waterSurfaceEffect != null && waterSurfaceEffect.isInWater)
         {
             // Reduce the animal's movement speed when in the water
