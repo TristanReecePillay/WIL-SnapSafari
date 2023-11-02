@@ -20,8 +20,8 @@ public class AnimalController : MonoBehaviour
     private void Update()
     {
         
-        RotateTowardsTarget(targetPosition);
         transform.LookAt((targetPosition)); //Animals look towards target but still walk sideways for some reason
+        RotateTowardsTarget(targetPosition);
 
         if (Vector3.Distance(transform.position, targetPosition) < 1.0f)  
         {
@@ -32,12 +32,12 @@ public class AnimalController : MonoBehaviour
         if (waterSurfaceEffect != null && waterSurfaceEffect.isInWater)
         {
             // Reduce the animal's movement speed when in the water
-            transform.Translate(moveDirection * moveSpeed * waterSurfaceEffect.reducedSpeed * Time.deltaTime);
+            transform.Translate(moveDirection * (moveSpeed * waterSurfaceEffect.reducedSpeed * Time.deltaTime));
         }
         else
         {
             // Normal movement speed on land
-            transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+            transform.Translate(moveDirection * (moveSpeed * Time.deltaTime));
         }
 
         

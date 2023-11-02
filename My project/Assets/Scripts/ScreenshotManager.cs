@@ -28,15 +28,15 @@ public class ScreenshotManager : MonoBehaviour
             TakeScreenshot();
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            ToggleScreenshotDisplay();
-            ToggleScreenshotPanel(); // Toggle the panel when Tab is pressed
-            //Time.timeScale = 0;
-            
-            // Check if the Tab key is pressed
-           
-        }
+        // if (Input.GetKeyDown(KeyCode.Tab))
+        // {
+        //     ToggleScreenshotDisplay();
+        //     ToggleScreenshotPanel(); // Toggle the panel when Tab is pressed
+        //     //Time.timeScale = 0;
+        //     
+        //     // Check if the Tab key is pressed
+        //    
+        // }
         
         if (Input.GetKeyDown(KeyCode.Tab))
         {
