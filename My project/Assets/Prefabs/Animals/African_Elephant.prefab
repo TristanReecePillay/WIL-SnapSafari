@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7625249225869649411}
   - component: {fileID: 7625249225869649412}
   - component: {fileID: 7625249225869649413}
-  m_Layer: 0
+  - component: {fileID: 85201252177111554}
+  m_Layer: 6
   m_Name: African_Elephant
-  m_TagString: Untagged
+  m_TagString: Animals
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +45,7 @@ BoxCollider:
   m_GameObject: {fileID: 7625249225869649414}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.7365538, y: 2.148705, z: 2.8687353}
   m_Center: {x: 0.040054977, y: 1.0752957, z: 0.19710207}
@@ -76,12 +77,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 812cbedd15309094697f2ef346ac12a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  maxDistance: 10
+  maxDistance: 20
   terrainLayer:
     serializedVersion: 2
     m_Bits: 8
   waterSurfaceEffect: {fileID: 0}
+--- !u!195 &85201252177111554
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7625249225869649414}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.5
+  m_Speed: 2
+  m_Acceleration: 5
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &686974287827303424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -148,6 +170,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fbe012ba26ea77343966ffe3a2d29da9, type: 3}
       propertyPath: m_Name
       value: African_Elephant
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fbe012ba26ea77343966ffe3a2d29da9, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbe012ba26ea77343966ffe3a2d29da9, type: 3}
