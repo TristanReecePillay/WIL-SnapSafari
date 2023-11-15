@@ -108,8 +108,8 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
-    agentSlope: 45
-    agentClimb: 0.4
+    agentSlope: 40
+    agentClimb: 0.3
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -895,12 +895,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 85201252177111554, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_Radius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 85201252177111554, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
       propertyPath: m_AgentTypeID
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7625249225869649410, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625249225869649410, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625249225869649410, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625249225869649410, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7625249225869649410, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
       propertyPath: m_LocalPosition.x
@@ -945,6 +961,42 @@ PrefabInstance:
     - target: {fileID: 7625249225869649414, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
       propertyPath: m_Name
       value: African_Elephant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8412781606806906823, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8412781606806906823, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8412781606806906823, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8412781606806906823, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8412781606806906823, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8412781606806906823, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8412781606806906823, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8412781606806906823, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8412781606806906823, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
