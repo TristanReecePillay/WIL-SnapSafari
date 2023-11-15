@@ -53,23 +53,39 @@ public class AnimalController : MonoBehaviour
 
     private void GenerateRandomTarget()
     {
-        float randomX = Random.Range(-maxDistance, maxDistance);
-        float randomZ = Random.Range(-maxDistance, maxDistance);
-        Vector3 randomOffset = new Vector3(randomX, 0, randomZ);
+        Vector3 randomDirection = Random.insideUnitSphere * maxDistance;
+        randomDirection += transform.position;
 
-        targetPosition = transform.position + randomOffset;
-
-        RaycastHit hit;
-        if (Physics.Raycast(targetPosition + Vector3.up * 10.0f, Vector3.down, out hit, Mathf.Infinity, terrainLayer))
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomDirection, out hit, maxDistance, NavMesh.AllAreas))
         {
-            targetPosition = hit.point + Vector3.up * 1.0f; ;
+            targetPosition = hit.position;
             MoveToTarget(targetPosition);
         }
         else
         {
-            // Handle the case where no terrain is hit (e.g., if terrainLayer is not set correctly)
-            Debug.LogWarning("Target position is not on the terrain.");
+            Debug.LogWarning("Could not find a valid position on the NavMesh.");
         }
+
+        //float randomX = Random.Range(-maxDistance, maxDistance);
+        //float randomZ = Random.Range(-maxDistance, maxDistance);
+        //Vector3 randomOffset = new Vector3(randomX, 0, randomZ);
+
+        //targetPosition = transform.position + randomOffset;
+
+        //RaycastHit hit;
+        //if (Physics.Raycast(targetPosition + Vector3.up * 10.0f, Vector3.down, out hit, Mathf.Infinity, terrainLayer))
+        //{
+        //    targetPosition = hit.point + Vector3.up * 1.0f; ;
+        //    MoveToTarget(targetPosition);
+        //}
+        //else
+        //{
+        //    // Handle the case where no terrain is hit (e.g., if terrainLayer is not set correctly)
+        //    Debug.LogWarning("Target position is not on the terrain.");
+        //}
+
+
     }
 
     private void MoveToTarget(Vector3 target)
