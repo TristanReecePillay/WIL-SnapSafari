@@ -6,6 +6,9 @@ using System.IO;
 
 public class ScreenshotManager : MonoBehaviour
 {
+    
+    public List<GameObject> animals;
+    public Camera cam;
     public Image screenshotDisplay;
     public GameObject screenshotPanel; // Reference to the UI panel
     public GameObject minimap;
@@ -19,6 +22,11 @@ public class ScreenshotManager : MonoBehaviour
     {
         screenshotDisplay.gameObject.SetActive(false); // Hide the image initially
         screenshotPanel.SetActive(false); // Hide the panel initially
+        cam = Camera.main;
+        if (animals == null || animals.Count == 0)
+        {
+            Debug.Log("Animal not assigned in Editor");
+        }
     }
 
     private void Update()
@@ -70,8 +78,49 @@ public class ScreenshotManager : MonoBehaviour
             }
             
         }
+
+        //also not currently working
+        // if (IsVisible(cam, animal))
+        // {
+        //     Debug.Log("Animal is Visible");
+        // }
+
+        foreach (GameObject animal in animals)
+        {
+            if (IsVisibleFromCamera(animal))
+            {
+                Debug.Log(animal.name + ": is visible to the camera!");
+                // Do something when the object is visible
+            }
+            else
+            {
+                Debug.Log(animal.name + ": is not visible to the camera!");
+                // Do something when the object is not visible
+            }
+        }
+        
     }
 
+    private bool IsVisibleFromCamera(GameObject obj)
+    {
+        if (obj == null || cam == null)
+        {
+            return false;
+        }
+
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            // Check if any part of the object is within the camera's view frustum
+            return GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(cam), renderer.bounds);
+        }
+        else
+        {
+            Debug.LogWarning("Target object has no Renderer component!");
+            return false;
+        }
+    }
+    
     private void TakeScreenshot()
     {
         StartCoroutine(CaptureScreenshot());
@@ -127,6 +176,23 @@ public class ScreenshotManager : MonoBehaviour
 
         SaveScreenshotToFile(screenshot);
     }
+
+    //Not currently working
+    /*private bool IsVisible(Camera c, GameObject animal)
+    {
+        var planes = GeometryUtility.CalculateFrustumPlanes(c);
+        var point = animal.transform.position;
+
+        foreach (var plane in planes)
+        {
+            if (plane.GetDistanceToPoint(point) > 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }*/
 
     private void HandleGameObjectDetection(GameObject detectedObject)
     {
