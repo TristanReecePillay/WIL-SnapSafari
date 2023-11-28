@@ -5,7 +5,9 @@ using UnityEngine;
 public class SkyboxController : MonoBehaviour
 {
     public Material dayMaterial;
+    //public Material morningMaterial;
     public Material nightMaterial;
+    //public Material duskMaterial;
 
     public Light sunLight;
 
@@ -13,7 +15,7 @@ public class SkyboxController : MonoBehaviour
     {
         float lightRotation = sunLight.transform.rotation.eulerAngles.x;
 
-        if (lightRotation < 270f)
+        if (lightRotation < 180f)
         {
             RenderSettings.skybox = dayMaterial;
         }
