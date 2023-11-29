@@ -4619,7 +4619,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 221084548077243404, guid: 496c5fea0493572479efa30652a39c83, type: 3}
       propertyPath: moveSpeed
-      value: 19.6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 221084548077243404, guid: 496c5fea0493572479efa30652a39c83, type: 3}
       propertyPath: playerCamera
