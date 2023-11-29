@@ -33,6 +33,7 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 1.0f;
             GameIsPaused = false;
             MiniMapMenuUI.SetActive(true);
+            Cursor.visible = false;
     }
 
      public void Pause()
@@ -41,6 +42,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0.0f;
         GameIsPaused = true;
         MiniMapMenuUI.SetActive(false);
+        Cursor.visible = true;
     }
 
     public void LoadMenu()
@@ -48,6 +50,7 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Loading Menu....");
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("Main Menu");
+        Cursor.visible = true;
     }
 
     public void QuitGame()
