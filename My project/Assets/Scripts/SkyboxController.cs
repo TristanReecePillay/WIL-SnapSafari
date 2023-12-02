@@ -9,20 +9,24 @@ public class SkyboxController : MonoBehaviour
     public Material nightMaterial;
     //public Material duskMaterial;
 
-    public Light sunLight;
+    public GameObject sunController;
 
     void Update()
     {
-        float lightRotation = sunLight.transform.rotation.eulerAngles.x;
+        if(sunController != null)
+        {
+            float lightRotation = sunController.transform.rotation.eulerAngles.x;
 
-        if (lightRotation < 180f)
-        {
-            RenderSettings.skybox = dayMaterial;
+            if (lightRotation < 180f)
+            {
+                RenderSettings.skybox = dayMaterial;
+            }
+            else
+            {
+                RenderSettings.skybox = nightMaterial;
+            }
         }
-        else
-        {
-            RenderSettings.skybox = nightMaterial;
-        }
+        
     }
 
 
