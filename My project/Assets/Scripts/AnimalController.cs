@@ -27,28 +27,7 @@ public class AnimalController : MonoBehaviour
         {
             GenerateRandomTarget();
         }
-        //transform.LookAt((targetPosition)); //Animals look towards target but still walk sideways for some reason
-        //RotateTowardsTarget(targetPosition);
 
-        //if (Vector3.Distance(transform.position, targetPosition) < 1.0f)  
-        //{
-        //    GenerateRandomTarget();
-        //}
-
-        //Vector3 moveDirection = (targetPosition - transform.position).normalized;
-        //if (waterSurfaceEffect != null && waterSurfaceEffect.isInWater)
-        //{
-        //    // Reduce the animal's movement speed when in the water
-        //    transform.Translate(moveDirection * (moveSpeed * waterSurfaceEffect.reducedSpeed * Time.deltaTime));
-        //}
-        //else
-        //{
-        //    // Normal movement speed on land
-        //    transform.Translate(moveDirection * (moveSpeed * Time.deltaTime));
-        //}
-
-        
-        //ConstrainToTerrain();
     }
 
     private void GenerateRandomTarget()
@@ -67,24 +46,6 @@ public class AnimalController : MonoBehaviour
             Debug.LogWarning("Could not find a valid position on the NavMesh.");
         }
 
-        //float randomX = Random.Range(-maxDistance, maxDistance);
-        //float randomZ = Random.Range(-maxDistance, maxDistance);
-        //Vector3 randomOffset = new Vector3(randomX, 0, randomZ);
-
-        //targetPosition = transform.position + randomOffset;
-
-        //RaycastHit hit;
-        //if (Physics.Raycast(targetPosition + Vector3.up * 10.0f, Vector3.down, out hit, Mathf.Infinity, terrainLayer))
-        //{
-        //    targetPosition = hit.point + Vector3.up * 1.0f; ;
-        //    MoveToTarget(targetPosition);
-        //}
-        //else
-        //{
-        //    // Handle the case where no terrain is hit (e.g., if terrainLayer is not set correctly)
-        //    Debug.LogWarning("Target position is not on the terrain.");
-        //}
-
 
     }
 
@@ -93,22 +54,7 @@ public class AnimalController : MonoBehaviour
         agent.SetDestination(target);
     }
 
-    private void ConstrainToTerrain()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up * 10.0f, Vector3.down, out hit, Mathf.Infinity, terrainLayer))
-        {
-            transform.position = hit.point;
-        }
 
-    }
-
-    private void RotateTowardsTarget(Vector3 target)
-    {
-        Vector3 directionToTarget = (target - transform.position);
-        Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime);
-    }
 
     private void OnDrawGizmos()
     {

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6639237788332983952}
   - component: {fileID: 6639237788332983965}
   - component: {fileID: 6639237788332983954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeoPerd 1
   m_TagString: Animals
   m_Icon: {fileID: 0}
