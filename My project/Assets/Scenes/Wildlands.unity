@@ -1275,6 +1275,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
+--- !u!1 &309496838 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6639237788332983964, guid: 86d8f266e4efa1741bc2f147b552f495, type: 3}
+  m_PrefabInstance: {fileID: 788228573}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &314243994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,6 +1409,9 @@ MonoBehaviour:
   - {fileID: 19205834}
   - {fileID: 171249816}
   - {fileID: 680710780}
+  - {fileID: 1791611787}
+  - {fileID: 309496838}
+  - {fileID: 2014441590}
   cam: {fileID: 914640770}
   screenshotDisplay: {fileID: 1675581136}
   screenshotPanel: {fileID: 658291862}
@@ -4074,6 +4082,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8ef8859a455b9e4bae668155af6f9a1, type: 3}
+--- !u!1 &1791611787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6639237788332983964, guid: 86d8f266e4efa1741bc2f147b552f495, type: 3}
+  m_PrefabInstance: {fileID: 6639237788957715962}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1872162633
 GameObject:
   m_ObjectHideFlags: 0
@@ -4555,6 +4568,11 @@ PrefabInstance:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7625249225869649414, guid: 97c14fe652df51f43a00306d320cf427, type: 3}
   m_PrefabInstance: {fileID: 1075651039}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2014441590 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6639237788332983964, guid: 86d8f266e4efa1741bc2f147b552f495, type: 3}
+  m_PrefabInstance: {fileID: 1977093331}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2072130561
 GameObject:
